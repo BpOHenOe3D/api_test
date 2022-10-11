@@ -7,8 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNot.not;
 
 public class ApiTests extends TestData {
 
@@ -56,7 +58,7 @@ public class ApiTests extends TestData {
                 .log().status()
                 .log().body()
                 .statusCode(STATUS_CODE_200)
-                .body("token", is("QpwL5tke4Pnpja7X4"));
+                .body("token", not(empty()));
     }
 
     @Test
