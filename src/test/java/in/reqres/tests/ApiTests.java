@@ -11,6 +11,7 @@ import static in.reqres.specs.RegistrationSpec.*;
 import static in.reqres.specs.UsersSpec.*;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 
 
 public class ApiTests {
@@ -24,7 +25,8 @@ public class ApiTests {
                 .get()
                 .then()
                 .spec(successGetUserListResponse)
-                .extract();
+                .body("data.findAll{it.email =~/.*?@reqres.in/}.email.flatten()",
+                        hasItem("eve.holt@reqres.in"));
     }
 
     @Test
